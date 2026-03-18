@@ -1,0 +1,45 @@
+<h1>{{searchTerm}}</h1>
+<div class="container">
+        <div class="row mt-4"></div>
+   <!--search box-->
+    <div class="col-sm-8">
+    <input type="search" placeholder="Search Text Here"class="form-control" [(ngModel)]="searchTerm"/>
+    
+
+</div>
+   <!-- Add employeee-->
+     <div class="col-sm-4 text-end">
+                <a role="button" 
+                   class="btn btn-outline-primary" 
+                   [routerLink]="['add']">
+                    Add Employee
+                </a>
+</div>
+   <!--Display Record-->
+<!--display records-->
+<br>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Date of joining</th>
+            <th scope="col">Gender</th>
+            <th scope ="col">In service</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of employeesService.employees">
+            <td>{{"PE0-"+emp.EmployeeId}}</td>
+            <td>{{emp.EmployeeName}}</td>
+            <td>{{emp.Designation}}</td>
+            {{emp.DateOfJoining | date:'dd-MMM-yyyy'}}
+            <td>{{emp.Contact}}</td>
+            <input type="checkbox" [checked]="emp.IsActive" disabled>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+</div>
