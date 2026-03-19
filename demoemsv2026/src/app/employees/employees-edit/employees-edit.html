@@ -1,1 +1,120 @@
-<p>employees-edit works!</p>
+<form #empForm="ngForm" (ngSubmit)="OnSubmit(empForm)">
+
+  <!-- Name -->
+   
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text"
+           name="EmployeeName"
+           #employeeName="ngModel"
+           [(ngModel)]="employee.EmployeeName"
+           minlength="3"
+           maxlength="25"
+           required
+           class="form-control"
+           [ngClass]="{'is-invalid': employeeName.touched && employeeName.invalid}" />
+
+    <!-- span messages -->
+    <span class="text-danger" *ngIf="employeeName.touched && employeeName.errors?.['required']">
+      Name is required
+    </span>
+    <span class="text-danger" *ngIf="employeeName.errors?.['minlength']">
+      Minimum 3 characters required
+    </span>
+    <span class="text-danger" *ngIf="employeeName.errors?.['maxlength']">
+      Maximum 25 characters allowed
+    </span>
+  </div>
+
+  <!-- Designation -->
+  <div class="form-group">
+    <label>Designation</label>
+    <input type="text"
+           name="Designation"
+           #designation="ngModel"
+           [(ngModel)]="employee.Designation"
+           required
+           class="form-control"
+           [ngClass]="{'is-invalid': designation.touched && designation.invalid}" />
+
+    <span class="text-danger" *ngIf="designation.touched && designation.invalid">
+      Designation is required
+    </span>
+  </div>
+
+  <!-- DateOfJoining -->
+  <div class="form-group">
+    <label>Date Of Joining</label>
+    <input type="date"
+           name="DateOfJoining"
+           #doj="ngModel"
+           [(ngModel)]="employee.DateOfJoining"
+           required
+           class="form-control"
+           [ngClass]="{'is-invalid': doj.touched && doj.invalid}" />
+
+    <span class="text-danger" *ngIf="doj.touched && doj.invalid">
+      Date of Joining is required
+    </span>
+  </div>
+
+  Department
+ <div class="form-group">
+  <label>Department</label>
+
+ <select name="DepartmentId"
+        [(ngModel)]="employee.DepartmentId"
+        class="form-control"
+        required>
+
+  <option [ngValue]="null">Select Department</option>
+
+  <option *ngFor="let dept of departments"
+          [ngValue]="dept.DepartmentId">
+    {{ dept.DepartmentName }}
+  </option>
+
+</select>
+</div>
+
+  <!-- Contact -->
+  <div class="form-group">
+    <label>Contact</label>
+    <input type="text"
+           name="Contact"
+           #contact="ngModel"
+           [(ngModel)]="employee.Contact"
+           pattern="^[0-9]{10}$"
+           required
+           class="form-control"
+           [ngClass]="{'is-invalid': contact.touched && contact.invalid}" />
+
+    <span class="text-danger" *ngIf="contact.errors?.['required']">
+      Contact is required
+    </span>
+    <span class="text-danger" *ngIf="contact.errors?.['pattern']">
+      Enter valid 10-digit number
+    </span>
+  </div>
+
+  <!-- IsActive -->
+  <div class="form-group">
+    <input type="checkbox"
+           name="IsActive"
+           [(ngModel)]="employee.IsActive" />
+    <label>Active</label>
+  </div>
+
+ <!--save button-->
+    <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-lg btn-primary form-control"
+        [disabled]="!(empForm.valid && empForm.dirty)" 
+      >
+        Update
+      </button>
+    </div>
+  
+
+</form>

@@ -1,6 +1,7 @@
-<form #employeeForm="ngForm">
+<form #empForm="ngForm" (ngSubmit)="OnSubmit(empForm)">
 
   <!-- Name -->
+   
   <div class="form-group">
     <label>Name</label>
     <input type="text"
@@ -58,23 +59,23 @@
   </div>
 
   Department
-  <div class="form-group">
-    <label>Department</label>
-    <select name="DepartmentId"
-            #dept="ngModel"
-            [(ngModel)]="employee.DepartmentId"
-            required
-            class="form-control"
-            [ngClass]="{'is-invalid': dept.touched && dept.invalid}">
-      <option value="">Select</option>
-      <option value="1">HR</option>
-      <option value="2">IT</option>
-    </select>
+ <div class="form-group">
+  <label>Department</label>
 
-    <span class="text-danger" *ngIf="dept.touched && dept.invalid">
-      Department is required
-    </span>
-  </div>
+ <select name="DepartmentId"
+        [(ngModel)]="employee.DepartmentId"
+        class="form-control"
+        required>
+
+  <option [ngValue]="null">Select Department</option>
+
+  <option *ngFor="let dept of departments"
+          [ngValue]="dept.DepartmentId">
+    {{ dept.DepartmentName }}
+  </option>
+
+</select>
+</div>
 
   <!-- Contact -->
   <div class="form-group">
@@ -104,10 +105,16 @@
     <label>Active</label>
   </div>
 
-  <!-- Submit -->
-  <button class="btn btn-primary"
-          [disabled]="employeeForm.invalid">
-    Submit
-  </button>
+ <!--save button-->
+    <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-lg btn-primary form-control"
+        [disabled]="!(empForm.valid && empForm.dirty)" 
+      >
+        INSERT
+      </button>
+    </div>
+  
 
 </form>

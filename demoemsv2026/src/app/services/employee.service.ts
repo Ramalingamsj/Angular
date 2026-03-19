@@ -13,11 +13,13 @@ export class EmployeeService {
 
   employee:Employee=new Employee();
   employees:Employee[]=[];
+  departments:Department[]=[]
 
   //constructor      httpClient=varaiable name
   constructor(private httpClient:HttpClient){
 
   }
+  
 
   //1=Get all employees
 
@@ -37,12 +39,15 @@ export class EmployeeService {
   }
   
 // get  departments
-getAllDepartments():Observable<Department[]>{//it returns a stram data(observalble)
-return this.httpClient.get<any>(
-  environment.apiUrl+'employees/departments'// eventually emits an array off Department
-).pipe(
-  map((res:any)=>res ??[])
-);
+getAllDepartments(): Observable<Department[]> {
+  return this.httpClient.get<any>(environment.apiUrl + 'employees/departments')
+    .pipe(
+      map(res => res.$values ?? []),
+      map((depts:Department[]) => {  // depts= res
+      this.departments = depts; //store in service
+      return depts;       //also return
+    })   // IMPORTANT FIX
+    );
 }
 //angular http is asynchronus observables help handle async data,subscribe to response and use operators map,filter
 //why  .pipe (map()) is used pipe is used to apply rxjs(map is the rxjs operator) operators to data
@@ -54,4 +59,11 @@ return this.httpClient.get<any>(
 insertEmployee(employee: Employee): Observable<Employee> {
     return this.httpClient.post<Employee>(environment.apiUrl + 'Employees', employee);
   }
+
+  updateEmployee(employee:Employee):Observable<any>{
+  return this.httpClient.put(
+    environment.apiUrl+'employees/'+employee.EmployeeId,employee);
+  
 }
+}
+

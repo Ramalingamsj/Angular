@@ -32,14 +32,23 @@
     </thead>
     <tbody>
         <tr *ngFor="let emp of employeesService.employees">
-            <td>{{"PE0-"+emp.EmployeeId}}</td>
-            <td>{{emp.EmployeeName}}</td>
-            <td>{{emp.Designation}}</td>
-            {{emp.DateOfJoining | date:'dd-MMM-yyyy'}}
-            <td>{{emp.Contact}}</td>
-            <input type="checkbox" [checked]="emp.IsActive" disabled>
-            <td></td>
-        </tr>
+    <td>{{ 'PE0-' + emp.EmployeeId }}</td>
+    <td>{{ emp.EmployeeName }}</td>
+    <td>{{ emp.Designation }}</td>
+    <td>{{ emp.DateOfJoining | date:'dd-MMM-yyyy' }}</td>
+    <td>{{ emp.Contact }}</td>
+    <td>
+        <input type="checkbox" [checked]="emp.IsActive" disabled>
+    </td>
+    <td>
+        <button class="btn btn-sm btn-outline-info" (click)="editEmployee(emp)">
+            <i class="fa fa-edit"></i>
+        </button>&nbsp;
+        <!-- <button class="btn btn-sm btn-outline-danger" (click)="deleteEmployee(emp)">
+            <i class=""fa fa-trash></i>
+        </button> -->
+    </td>
+</tr>
     </tbody>
 </table>
 </div>

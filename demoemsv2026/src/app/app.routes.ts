@@ -20,7 +20,7 @@ export const routes: Routes = [
       { path: 'list', component: EmployeeList },
       // add an employee
       { path: 'add', component: EmployeesAdd },
-      { path: 'edit/id', component: EmployeesEdit }
+      { path: 'edit/:id', component: EmployeesEdit }
     ]
   }
 ];
