@@ -42,26 +42,34 @@ errorMessage:string='';
     checkLoginCredentials():void{
       //setting is submitted
       this.isSubmitted=true;
-      if(this,this.loginForm?.invalid){
+      if(this.loginForm?.invalid){
+        this.errorMessage='Pls enter username and password';
+        return;
+      }
+      if(this.loginForm?.valid){
         this.errorMessage='';
         console.log(this.loginForm.value)
        //call REST API to check Username and Password
         this.authService.loginVerify(this.loginForm.value).subscribe(
         (response:any)=>{
-          console.log(response);
+          console.log("Log",response);
           //Based on Role need to redirect
-          if(response.roleId===1){
+          if(response.roleid===0){
+            this.errorMessage='Invalid UserName and Password';
+          }
+          
+          if(response.roleid===1){
             console.log("Admin");
             //local storage
             localStorage.setItem("USER_NAME",response.uName);
-            localStorage.setItem("ACCESS_ROLE",response.roleId.tostring());
+            localStorage.setItem("ACCESS_ROLE",response.roleid);
             localStorage.setItem("JWT_TOKEN",response.token);
             //Redirect to ADMIN
             this.router.navigate(['auth/admin']);
-          }else if(response.RoleId===2){
+          }else if(response.roleid===2){
           //localStorage
             localStorage.setItem("USER_NAME",response.uName);
-            localStorage.setItem("ACCESS_ROLE",response.roleId.tostring());
+            localStorage.setItem("ACCESS_ROLE",response.roleid.tostring());
             localStorage.setItem("JWT_TOKEN",response.token);
              //Redirect to ADMIN
             this.router.navigate(['auth/manager']);

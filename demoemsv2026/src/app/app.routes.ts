@@ -6,6 +6,8 @@ import { EmployeesAdd } from './employees/employees-add/employees-add';
 import { Employees } from './employees/employees';
 import { Login } from './auth/login/login';
 import { log } from 'console';
+import { AdminDashboard } from './auth/admin-dashboard/admin-dashboard';
+import { ManagerDashboard } from './auth/manager-dashboard/manager-dashboard';
 
 export const routes: Routes = [
   //Lazy Loading
@@ -20,9 +22,9 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: Login },
       // // call list of employees
-      // { path: 'admin', component: EmployeeList },
-      // // add an employee
-      // { path: 'manager', component: EmployeesAdd },
+      { path: 'admin', component: AdminDashboard },
+      // add an employee
+      { path: 'manager', component: ManagerDashboard },
       // { path: 'notfound', component: EmployeesEdit }
       
     ]
