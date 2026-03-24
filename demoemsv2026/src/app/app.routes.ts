@@ -8,6 +8,7 @@ import { Login } from './auth/login/login';
 import { log } from 'console';
 import { AdminDashboard } from './auth/admin-dashboard/admin-dashboard';
 import { ManagerDashboard } from './auth/manager-dashboard/manager-dashboard';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   //Lazy Loading
@@ -22,9 +23,15 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: Login },
       // // call list of employees
-      { path: 'admin', component: AdminDashboard },
+      { path: 'admin', component: AdminDashboard ,
+        canActivate:[authGuard],
+        data:{roleid:1}
+      },
       // add an employee
-      { path: 'manager', component: ManagerDashboard },
+      { path: 'manager', component: ManagerDashboard ,
+        canActivate:[authGuard],
+        data:{roleid:2}
+      },
       // { path: 'notfound', component: EmployeesEdit }
       
     ]
