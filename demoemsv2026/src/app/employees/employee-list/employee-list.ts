@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Employee } from '../../models/employee';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-employee-list',

@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  height: 100vh; /* full screen height */
+}
+
+/* LEFT: 40% */
+.left {
+  width: 40%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+/* RIGHT: 60% */
+.right {
+  width: 60%;
+  padding: 20px;
+  overflow-y: auto;
+}

@@ -1,0 +1,88 @@
+<div class="container mt-5">
+  <div class="row align-items-center">
+    <!-- Left side: EMS Profile content -->
+    <div class="col-lg-6 d-flex align-items-center">
+      <div class="d-flex flex-row align-items-start w-100">
+        <!-- LOGO -->
+        <img src="asset/i1.png" alt="EMS Logo" class="img-fluid" />
+        <!-- Welcome Text -->
+      </div>
+
+      <div>
+        <h1 class="mb-3">Welcome to EMS</h1>
+        <p class="mb-3">
+          EMS (Employee Management System) helps you efficiently manage employee data,
+          track performance, and streamline HR processes.
+        </p>
+        <ul>
+          <li>Manage employee records</li>
+          <li>Track performance metrics</li>
+          <li>Generate insightful reports</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right side: Login Form -->
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-title text-center">
+          <hr />
+
+          <!-- Login Form -->
+          <form [formGroup]="loginForm" (ngSubmit)="checkLoginCredentials()">
+            <!-- UserName -->
+            <div class="form-group">
+              <input
+                type="text"
+                placeholder="Enter User Name"
+                formControlName="username"
+                class="form-control"
+              />
+              <!-- Validation Message -->
+              <span
+                class="text-danger"
+                *ngIf="isSubmitted && getAllformControls['username'].errors?.['required']"
+              >
+                User Name is required
+              </span>
+            </div>
+            <!--Pattern-->
+                            <span class="text-danger"
+                                *ngIf="isSubmitted && getAllformControls['username'].errors?.['pattern']">
+                                User Name must be 3-15 chaarcters, only letters, numbers, underscore
+                            </span>
+
+            <!-- Password -->
+            <div class="form-group">
+              <input
+                type="password"
+                placeholder="Enter password"
+                formControlName="password"
+                class="form-control"
+              />
+              <!-- Validation Message -->
+              <span
+                class="text-danger"
+                *ngIf="isSubmitted && getAllformControls['password'].errors?.['required']"
+              >
+                Password is required
+              </span>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+              <button type="submit" class="btn btn-lg btn-primary form-control">
+                Login
+              </button>
+            </div>
+
+            <!-- Error message -->
+            <div class="text-danger" *ngIf="errorMessage">
+              {{ errorMessage }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,12 +27,14 @@ export class EmployeesAdd implements OnInit {
   }
 
   //Get all Departments-- select dropdown box department names
-  loadDepartments():void{
-    if(this.employeeService.departments.length === 0){
-      this.employeeService.getAllDepartments().subscribe();
-       //departments
-    }
-  }
+  loadDepartments(): void {
+  this.employeeService.getAllDepartments().subscribe({
+    next: (data) => {
+      this.departments = data; // ✅ FIX
+    },
+    error: (err) => console.log(err)
+  });
+}
   //Submit form
   OnSubmit(empForm: NgForm){
     console.log(empForm.value);
@@ -44,7 +46,8 @@ export class EmployeesAdd implements OnInit {
   addEmployee(empForm: NgForm): void {
     this.employeeService.insertEmployee(empForm.value).subscribe({
       next: () => {
-        this.router.navigate(['list']);
+        this.employeeService.getAllEmployees();
+        this.router.navigate(['']);
         empForm.reset();
       },
       error: (err) => console.log(err)
