@@ -49,7 +49,7 @@ export class EmployeesAdd implements OnInit {
   this.employeeService.insertEmployee(empForm.value).subscribe({
     next: () => {
       this.employeeService.getAllEmployees();
-      this.router.navigate(['']);
+      this.router.navigate(['employees']);
       this.toaster.success('Employee Added Successfully!', 'EMS v2026');
       empForm.reset();
     },
