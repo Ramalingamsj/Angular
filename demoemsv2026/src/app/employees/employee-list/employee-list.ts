@@ -5,17 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Employee } from '../../models/employee';
 import { OnInit } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-employee-list',
   standalone:true,
-  imports: [CommonModule, FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule,RouterModule,NgxPaginationModule],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.css',
 })
 export class EmployeeList {
     //Inject the sevice
     searchTerm:string='';
+    p:number=1;
+    itemmsPerPage:number=5;
     
     constructor(public employeesService:EmployeeService, public router:Router){                  //ie here initilaized in services there is get method
         console.log('EmployeeListComponent initilaized');

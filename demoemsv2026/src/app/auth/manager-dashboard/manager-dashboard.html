@@ -1,2 +1,20 @@
-<p>manager-dashboard works!</p>
-<app-header>
+
+<app-header></app-header>
+
+<div class="container mt-2">
+  <a [routerLink]="['/employees/list']" role="button" class="btn btn-outline-primary">
+    <span>
+      <i class="fa fa-users fa-lg"></i>
+    </span>
+    <br />
+    List Employees
+  </a>
+  &nbsp;
+  <a [routerLink]="['/employees/add']" role="button" class="btn btn-outline-primary">
+    <span>
+      <i class="fa fa-users-plus fa-lg"></i>
+    </span>
+    <br />
+    Add Employees
+  </a>
+</div>

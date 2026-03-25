@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Department } from '../../models/department';
 import { Employee } from '../../models/employee';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employees-add',
@@ -19,7 +20,8 @@ export class EmployeesAdd implements OnInit {
 
   constructor(
     public employeeService: EmployeeService,
-    private router: Router
+    private router: Router,
+    private toaster:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +45,18 @@ export class EmployeesAdd implements OnInit {
     this.addEmployee(empForm);
 
   }
-  addEmployee(empForm: NgForm): void {
-    this.employeeService.insertEmployee(empForm.value).subscribe({
-      next: () => {
-        this.employeeService.getAllEmployees();
-        this.router.navigate(['']);
-        empForm.reset();
-      },
-      error: (err) => console.log(err)
-    });
-  }
+ addEmployee(empForm: NgForm): void {
+  this.employeeService.insertEmployee(empForm.value).subscribe({
+    next: () => {
+      this.employeeService.getAllEmployees();
+      this.router.navigate(['']);
+      this.toaster.success('Employee Added Successfully!', 'EMS v2026');
+      empForm.reset();
+    },
+    error: (err) => {
+      console.log(err);
+      this.toaster.error('Sorry!', 'EMS v2026'); // ✅ inside block
+    }
+  });
+}
 }

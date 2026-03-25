@@ -69,7 +69,7 @@ errorMessage:string='';
           }else if(response.roleid===2){
           //localStorage
             localStorage.setItem("USER_NAME",response.uName);
-            localStorage.setItem("ACCESS_ROLE",response.roleid.tostring());
+            localStorage.setItem("ACCESS_ROLE",response.roleid);
             localStorage.setItem("JWT_TOKEN",response.token);
              //Redirect to ADMIN
             this.router.navigate(['auth/manager']);

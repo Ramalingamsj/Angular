@@ -25,12 +25,12 @@ export const routes: Routes = [
       // // call list of employees
       { path: 'admin', component: AdminDashboard ,
         canActivate:[authGuard],
-        data:{roleid:1}
+        data:{roleid:'1'}
       },
       // add an employee
       { path: 'manager', component: ManagerDashboard ,
         canActivate:[authGuard],
-        data:{roleid:2}
+        data:{roleid:'2'}
       },
       // { path: 'notfound', component: EmployeesEdit }
       
@@ -39,9 +39,16 @@ export const routes: Routes = [
   {
     path: 'employees',
     children: [
-      { path: '', component: Employees },
+      { path: '', component: Employees,
+        canActivate:[authGuard],
+        data:{roleid:'1'}
+      },
+
       // call list of employees
-      { path: 'list', component: EmployeeList },
+      { path: 'list', component: Employees ,
+        canActivate:[authGuard],
+        data:{roleid:'2'}
+      },
       // add an employee
       { path: 'add', component: EmployeesAdd },
       { path: 'edit/:id', component: EmployeesEdit }
